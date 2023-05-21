@@ -19,21 +19,48 @@ already handled such as below:
 
 * Linux, Windows
 
-- macOS (not tested but possible)
-
-##### Available exchanges/brokers
+##### Available connectors (exchanges/brokers)
 
 * Binance
 * Bybit
 
-##### BUILD EXAMPLE
+##### BUILD Dependencies
 
+[Linux](BUILD_LIBRARIES_LINUX.md)
+
+[Windows](BUILD_LIBRARIES_WIN.md)
+
+##### Build SPMAKER
+
+* On Linux terminal
 ```
 scl enable devtoolset-9 bash
-git clone https://github.com/stelgic/connectors.git
-cd connectors
-cmake . -DG3LOG_ROOT=/home/dom/Desktop/OPENSOURCES/LIBRARIES/g3log
+git clone https://github.com/silvadom/spmaker.git
+cd spmaker
+cmake . -DG3LOG_ROOT=/usr/local/g3log -DJSON_ROOT=/usr/local/json
 make install
+```
+
+* On Windows cmd
+```
+git clone https://github.com/stelgic/qcraftor.git
+cd qcraftor
+cmake . -DG3LOG_ROOT=/PATH/TO/g3log -DJSON_ROOT=/PATH/TO/json
+```
+
+With visual studio 2019 or 2022
+
+    * Open solution qcraftor.sln 
+    * set Solution Configuration to "RelWithdebugInfo"
+
+* Others CMAKE libraries root path options:
+```
+-DJSON_ROOT=path_to_json
+-DOPENSSL_ROOT=path_to_openssl
+-DG3LOG_ROOT=path_to_g3log
+-DONETBB_ROOT=path_to_onetbb
+-DBOOST_ROOT=path_to_boost
+-DCPR_ROOT=path_to_cpr
 ```
 
 ##### RUN EXAMPLE
