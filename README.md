@@ -72,6 +72,22 @@ cd connectors/build/bin
 ./example
 ```
 
+##### Load shared library connector in your program
+```c++
+std::string MODULE_PATH = fs::canonical(filename).string();
+ModuleLoader<IExchange> module(MODULE_PATH);
+std::tie(success, err) = module.Open();
+if(success)
+{
+    // create instance of connector
+    IExchange* connector = module.GetInstance();
+    if(connector == nullptr)
+    {
+        return EXIT_FAILURE;
+    }
+}
+```
+
 ##### Consume parsed data - example/main.cpp
 
 ```
