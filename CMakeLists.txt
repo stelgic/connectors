@@ -53,6 +53,10 @@ install(DIRECTORY DESTINATION ${BUILD_DIR})
 install(DIRECTORY DESTINATION ${BUILD_DIR}/bin)
 install(DIRECTORY DESTINATION ${BUILD_DIR}/modules)
 
+set(SRC_CONFIG_DIR ${CMAKE_SOURCE_DIR}/configs)
+set(CONFIG_DIR ${BUILD_DIR}/configs)
+install(DIRECTORY ${SRC_CONFIG_DIR}/ DESTINATION ${CONFIG_DIR})
+
 # Recurse into the subdirectories. This does not actually
 # cause another cmake executable to run. The same process will walk through
 # the project's entire directory structure.

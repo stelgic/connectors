@@ -132,7 +132,7 @@ int main(int argc, char** argv)
 
     // Initiliaze connector
     LOG(INFO) << "Initializing...";
-    connector->Init(connParams["binance"], verbosity, );
+    connector->Init(connParams["binance"], verbosity, logworker.get());
     if(!connector->IsInitialized())
     {
         LOG(INFO) << "Failed to Initialize connector";
