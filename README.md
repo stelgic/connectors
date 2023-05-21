@@ -59,7 +59,7 @@ With visual studio 2019 or 2022
 
 ```
 cd build/bin
-./example -e bybit --risk 0.2 --capital 5000 --threads 8 --timeout 2 -v 1
+./example -e bybit --threads 4 -v 1
 ```
 
 #### License

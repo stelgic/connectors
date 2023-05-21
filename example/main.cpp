@@ -72,6 +72,12 @@ int main(int argc, char** argv)
         _Exit(EXIT_FAILURE);
     });
 
+    if(!getCommandLineArgs(argc, argv))
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+        _Exit(EXIT_FAILURE);
+    }
+
     /** ########################################################
      * @brief load shared library connector
      * ########################################################
@@ -132,7 +138,7 @@ int main(int argc, char** argv)
 
     // Initiliaze connector
     LOG(INFO) << "Initializing...";
-    connector->Init(connParams["binance"], verbosity, logworker.get());
+    connector->Init(connParams[exchange], verbosity, logworker.get());
     if(!connector->IsInitialized())
     {
         LOG(INFO) << "Failed to Initialize connector";
@@ -220,10 +226,10 @@ int main(int argc, char** argv)
     workers.push_back(connector->KeepAlive());
 
     // connect and subscribe to exchange 
-    ConnState state = connector->Connect(connParams["binance"]);
+    ConnState state = connector->Connect(connParams[exchange]);
     if(state != ConnState::Opened)
     {
-        LOG(WARNING) << "Failed to connect exchange";
+        LOG(WARNING) << "Failed to connect exchange " << exchange;
         std::this_thread::sleep_for(std::chrono::seconds(2));
         _Exit(EXIT_FAILURE);
     }
@@ -233,7 +239,7 @@ int main(int argc, char** argv)
     std::this_thread::sleep_for(std::chrono::seconds(5));
 
     // subscribe to websocket channels
-    connector->Subscribe(connParams["binance"]);
+    connector->Subscribe(connParams[exchange]);
 
     /** ########################################################
      * @brief To create new order check uncomment code below
